@@ -5,5 +5,11 @@ A collection of commands, one liners, and generally helpful things I've come acr
 
 This will return a list of all deployments currently using a secret through an environment variable.
 ```bash
-kubectl get deployments -o json | jq '.items[] | { name: .metadata.name, secrets: [ .spec.template.spec.containers[]?.env[]?.valueFrom.secretKeyRef.name ] } | select(.secrets[] == "db-uri")'
+kubectl get deployments -o json | jq '.items[] | { name: .metadata.name, secrets: [ .spec.template.spec.containers[]?.env[]?.valueFrom.secretKeyRef.name ] } | select(.secrets[] == "<SECRET NAME>")'
+```
+
+## Search Deployments for Annotation
+
+```bash
+kubectl get cronjobs -o json | jq '.items[] | { name: .metadata.name, annotations: ( .metadata.annotations | keys ) } | select( .annotations[] == "<ANNOTATION>")'
 ```
