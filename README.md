@@ -11,5 +11,5 @@ kubectl get deployments -o json | jq '.items[] | { name: .metadata.name, secrets
 ## Search Deployments for Annotation
 
 ```bash
-kubectl get cronjobs -o json | jq '.items[] | { name: .metadata.name, annotations: ( .metadata.annotations | keys ) } | select( .annotations[] == "<ANNOTATION>")'
+kubectl get deployments -o json | jq '.items[] | { name: .metadata.name, annotations: ( .metadata.annotations | keys ) } | select( .annotations[] == "<ANNOTATION>")'
 ```
