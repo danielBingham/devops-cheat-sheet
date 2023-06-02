@@ -13,3 +13,9 @@ kubectl get deployments -o json | jq '.items[] | { name: .metadata.name, secrets
 ```bash
 kubectl get deployments -o json | jq '.items[] | { name: .metadata.name, annotations: ( .metadata.annotations | keys ) } | select( .annotations[] == "<ANNOTATION>")'
 ```
+
+## Watch pod restarts on Kubernetes
+
+```bash
+$ watch -n1 'kubectl get pods -A -o wide | grep -Ev "Running|Completed"'
+```
